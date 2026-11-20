@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Ночная планета">
 <meta name="theme-color" content="#172852">
 <title>Ночная планета слов</title>
@@ -250,6 +250,8 @@ a.ylink:hover{color:#ffc61a !important}
 .fstip-in b{color:var(--title)}
 .fstip-in .fsi{display:inline-block;padding:0 6px;border-radius:6px;background:rgba(0,0,0,.08)}
 .fstip-in .btn{margin:16px auto 0;display:inline-flex}
+.hud{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.cover{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 </style>
 </head>
 <body class="intro-on">
@@ -2796,6 +2798,7 @@ function loop(now){
 
 /* ---------- boot ---------- */
 renderTabs();renderPicker();buildWorld(curType,[]);updateCamera();requestAnimationFrame(loop);
+[120,500,1200,2500].forEach(t=>setTimeout(updateCamera,t));addEventListener('pageshow',()=>setTimeout(updateCamera,60));document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(updateCamera,60);});
 /* music: starts on the first tap/click anywhere (same way as in Планета слов) */
 (function(){const EV=['click','touchend','keydown','pointerup'];let done=false;
   function go(){if(done)return;try{startMusic();}catch(e){}setTimeout(()=>{if(!done&&MSRC&&AC&&AC.state==='running'){done=true;EV.forEach(t=>removeEventListener(t,go));}},600);}
